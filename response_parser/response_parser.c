@@ -7,6 +7,11 @@
 #include "../util/find_pattern.c"
 #include "../util/read_next_and_expect.c"
 
+/**
+ * @brief Function for parsing the response received by an ESP001S WiFi module. Communication with it is done over UART, so each character is treated as if it is received over UART.
+ * 
+ * @return char* A pointer to the parsed response.
+ */
 char *response_parser(void)
 {
     char *fullRawResponse = malloc(1);
@@ -39,7 +44,6 @@ char *response_parser(void)
         strcat(fullRawResponse, chunk);
         free(chunk);
         *(fullRawResponse + currentResponseSize + currentChunkLength - 1) = '\0';
-        printf("%s\n", fullRawResponse);
         if (!read_next_and_expect("\r\n+IPD,", responseStart + counter + 1 + bodyCounter))
             break;
         responseStart = responseStart + counter + 1 + bodyCounter + 7;

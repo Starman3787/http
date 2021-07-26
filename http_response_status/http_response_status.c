@@ -15,9 +15,9 @@ uint16_t http_response_status(char *rawHttp)
     uint8_t index;
     for (index = 0; index < strlen(httpSupported); index++)
         if (*(rawHttp + index) != *(httpSupported + index))
-            return 0;
+            return 0U;
     if (*(rawHttp + index) != ' ')
-        return 0;
+        return 0U;
     index++;
     char *rawHttpStatus = "\0\0\0";
     strncpy(rawHttpStatus, rawHttp + index, 3);

@@ -8,7 +8,7 @@
 #include "../util/read_next_and_expect.c"
 
 /**
- * @brief Function for parsing the response received by an ESP001S WiFi module. Communication with it is done over UART, so each character is treated as if it is received over UART.
+ * @brief Function for parsing the response received from an ESP001S WiFi module. Communication with it is done over UART, so each character is treated as if it is received over UART.
  * 
  * @return char* A pointer to the parsed response.
  */

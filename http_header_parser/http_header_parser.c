@@ -3,6 +3,13 @@
 #include <stdio.h>
 #include "./http_header_structures.h"
 
+/**
+ * @brief Extracts the headers from a raw HTTP response, and returns a pointer to an array of pointers to Header structures.
+ * 
+ * @param *rawHttp A pointer to the zeroth index of the raw HTTP response.
+ * @param *headerIndex A pointer which will contain the value of the number of headers extracted from this response.
+ * @return struct Header** 
+ */
 struct Header **http_header_parser(char *rawHttp, uint8_t *headerIndex)
 {
     struct Header **allHeaders = malloc(1 * sizeof(struct Header *));

@@ -9,12 +9,12 @@ struct Header **http_header_parser(char *rawHttp, uint8_t *headerIndex)
     while (!(*rawHttp == '\r' && *(rawHttp + 1) == '\n'))
         rawHttp++;
     rawHttp += 2;
-    (*headerIndex) = 0;
+    *headerIndex = 0;
     while (1)
     {
         if (*rawHttp == '\r' && *(rawHttp + 1) == '\n')
             break;
-        allHeaders = realloc(allHeaders, ((*headerIndex) + 1) * sizeof(struct Header *));
+        allHeaders = realloc(allHeaders, (*headerIndex + 1) * sizeof(struct Header *));
         char *key = malloc(1);
         *key = '\0';
         uint8_t keyLength;

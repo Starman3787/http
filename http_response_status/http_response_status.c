@@ -12,15 +12,14 @@
  */
 uint16_t http_response_status(char *rawHttp)
 {
-    uint8_t index;
-    for (index = 0; index < strlen(httpSupported); index++)
-        if (*(rawHttp + index) != *(httpSupported + index))
+    for (uint8_t index = 0; index < strlen(httpSupported); index++, rawHttp++)
+        if (*rawHttp != *(httpSupported + index))
             return 0U;
-    if (*(rawHttp + index) != ' ')
+    if (*rawHttp != ' ')
         return 0U;
-    index++;
+    rawHttp++;
     char *rawHttpStatus = "\0\0\0";
-    strncpy(rawHttpStatus, rawHttp + index, 3);
-    char *rawHttpStatusEnd = rawHttpStatus + index + 3;
+    strncpy(rawHttpStatus, rawHttp, 3);
+    char *rawHttpStatusEnd = rawHttpStatus + 3;
     return strtoul(rawHttpStatus, &rawHttpStatusEnd, 10);
 }

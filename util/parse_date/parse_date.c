@@ -1,5 +1,4 @@
 #include <stdint.h>
-#include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
 #include "./parse_date.h"

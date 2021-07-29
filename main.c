@@ -22,5 +22,5 @@ void main(void)
     Header *headerFound = find_header(headers, headersLength, "date");
     printf("%s\n", headerFound->value);
     time_t currentTime = parse_date(headerFound->value);
-    printf("%li\n", currentTime);
+    printf("%lli\n", currentTime);
 }

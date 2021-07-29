@@ -1,9 +1,9 @@
 #ifndef HTTP_HEADER_STRUCTURES
 #define HTTP_HEADER_STRUCTURES
 
-struct Header {
+typedef struct header {
     char *key;
     char *value;
-};
+} Header;
 
 #endif

@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <string.h>
+#include <stdio.h>
 
 char months[12][4] = {
     "Jan",
@@ -21,4 +22,5 @@ int8_t convertMonth(char *month)
     for (int8_t i = 0; i < sizeof(months) / 4; i++)
         if (strcmp(month, months[i]) == 0)
             return i;
+    return NULL;
 }

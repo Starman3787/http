@@ -10,7 +10,7 @@
  * @param *headerIndex A pointer which will contain the value of the number of headers extracted from this response.
  * @return struct Header** 
  */
-Header **http_header_parser(char *rawHttp, uint8_t *headerIndex)
+Header **http_header_parser(char *rawHttp, uint8_t *headerIndex, char *headersEnd)
 {
     Header **allHeaders = malloc(1 * sizeof(Header *));
     while (!(*rawHttp == '\r' && *(rawHttp + 1) == '\n'))
@@ -50,5 +50,6 @@ Header **http_header_parser(char *rawHttp, uint8_t *headerIndex)
         rawHttp++;
         (*headerIndex)++;
     }
+    headersEnd = ++rawHttp;
     return allHeaders;
 }

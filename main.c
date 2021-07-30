@@ -16,7 +16,7 @@ void main(void)
     printf("%lu\n", status);
     uint8_t headersLength;
     char *headersEnd;
-    Header **headers = http_header_parser(response, &headersLength, headersEnd);
+    Header **headers = http_header_parser(response, &headersLength, &headersEnd);
     printf("%d\n", headersLength);
     for (uint8_t i = 0; i < headersLength; i++)
         printf("%s: %s\n", (*(headers + i))->key, (*(headers + i))->value);

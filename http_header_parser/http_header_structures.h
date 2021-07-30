@@ -1,5 +1,5 @@
-#ifndef HTTP_HEADER_STRUCTURES
-#define HTTP_HEADER_STRUCTURES
+#ifndef HTTP_HEADER_STRUCTURES_H
+#define HTTP_HEADER_STRUCTURES_H
 
 typedef struct header {
     char *key;

@@ -1,3 +1,6 @@
+#ifndef PARSE_DATE_H
+#define PARSE_DATE_H
+
 #include <stdint.h>
 #include <string.h>
 #include <stdio.h>
@@ -24,3 +27,5 @@ int8_t convertMonth(char *month)
             return i;
     return NULL;
 }
+
+#endif

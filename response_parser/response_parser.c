@@ -1,8 +1,6 @@
-#include <stdio.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include "../data/esp001s_response.h"
 #include "../util/find_pattern/find_pattern.c"
 #include "../util/read_next_and_expect/read_next_and_expect.c"
@@ -14,7 +12,7 @@
  */
 char *response_parser(void)
 {
-    char *fullRawResponse = malloc(1);
+    char *fullRawResponse = malloc(sizeof(char) * 1);
     *fullRawResponse = '\0';
     size_t currentResponseSize = 1;
     uint16_t responseStart = find_pattern("+IPD,", 5);
@@ -22,11 +20,11 @@ char *response_parser(void)
     {
         uint16_t currentChunkLength;
         char currentCharacter = *(rawResponse + responseStart);
-        char *rawChunkLength = malloc(2);
+        char *rawChunkLength = malloc(sizeof(char) * 2);
         uint8_t counter;
         for (counter = 0; currentCharacter != ':'; counter++)
         {
-            rawChunkLength = realloc(rawChunkLength, counter + 2);
+            rawChunkLength = realloc(rawChunkLength, sizeof(char) * (counter + 2));
             *(rawChunkLength + counter) = currentCharacter;
             *(rawChunkLength + counter + 1) = '\0';
             currentCharacter = *(rawResponse + responseStart + counter + 1);
@@ -34,13 +32,13 @@ char *response_parser(void)
         char *endOfRawChunkLengthString = rawChunkLength + counter + 1;
         currentChunkLength = strtoul(rawChunkLength, &endOfRawChunkLengthString, 10) + 1;
         free(rawChunkLength);
-        char *chunk = malloc(currentChunkLength);
+        char *chunk = malloc(sizeof(char) * currentChunkLength);
         uint16_t bodyCounter;
         for (bodyCounter = 0; bodyCounter < currentChunkLength - 1; bodyCounter++)
             *(chunk + bodyCounter) = *(rawResponse + responseStart + counter + 1 + bodyCounter);
         *(chunk + currentChunkLength - 1) = '\0';
         currentResponseSize += currentChunkLength - 1;
-        fullRawResponse = realloc(fullRawResponse, currentResponseSize);
+        fullRawResponse = realloc(fullRawResponse, sizeof(char) * currentResponseSize);
         strcat(fullRawResponse, chunk);
         free(chunk);
         *(fullRawResponse + currentResponseSize + currentChunkLength - 1) = '\0';

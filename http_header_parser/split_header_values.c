@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-char **split_header_values(char *headerValue, uint8_t *values, char splitBy)
+char **split_header_values(char *headerValue, uint8_t *values, const char splitBy)
 {
     char **headerValues = malloc(sizeof(char *) * 1);
     *values = 0;

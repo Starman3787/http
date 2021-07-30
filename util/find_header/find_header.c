@@ -6,7 +6,7 @@
 #include <string.h>
 #include "../../http_header_parser/http_header_structures.h"
 
-Header *find_header(Header **headers, uint8_t headersLength, char *key)
+Header *find_header(Header **headers, uint8_t headersLength, const char *key)
 {
     for (; headersLength--; *(headers++))
         if (strcmp(tolower((*headers)->key), tolower(key)) == 0)

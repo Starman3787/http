@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdio.h>
 
-char months[12][4] = {
+const char months[12][4] = {
     "Jan",
     "Feb",
     "Mar",
@@ -20,7 +20,7 @@ char months[12][4] = {
     "Dec"
 };
 
-int8_t convertMonth(char *month)
+int8_t convertMonth(const char *month)
 {
     for (int8_t i = 0; i < sizeof(months) / 4; i++)
         if (strcmp(month, months[i]) == 0)

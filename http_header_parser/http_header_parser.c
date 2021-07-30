@@ -1,6 +1,5 @@
 #include <stdint.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include "./http_header_structures.h"
 
 /**
@@ -12,7 +11,7 @@
  */
 Header **http_header_parser(char *rawHttp, uint8_t *headerIndex, char *headersEnd)
 {
-    Header **allHeaders = malloc(1 * sizeof(Header *));
+    Header **allHeaders = malloc(sizeof(Header *) * 1);
     while (!(*rawHttp == '\r' && *(rawHttp + 1) == '\n'))
         rawHttp++;
     rawHttp += 2;

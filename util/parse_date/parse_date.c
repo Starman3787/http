@@ -9,11 +9,11 @@ time_t parse_date(char *date)
     time_t t_of_day;
     t.tm_isdst = 0;
     date += 4;
-    char *mday = malloc(1);
+    char *mday = malloc(sizeof(char) * 1);
     *mday = '\0';
     for (uint8_t i = 1; *(++date) != ' '; i++)
     {
-        mday = realloc(mday, i + 1);
+        mday = realloc(mday, sizeof(char) * (i + 1));
         *(mday + i - 1) = *date;
         *(mday + i) = '\0';
     }
@@ -28,7 +28,7 @@ time_t parse_date(char *date)
     *year = '\0';
     for (uint8_t i = 1; *(++date) != ' '; i++)
     {
-        year = realloc(year, i + 1);
+        year = realloc(year, sizeof(char) * (i + 1));
         *(year + i - 1) = *date;
         *(year + i) = '\0';
     }

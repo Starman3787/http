@@ -8,8 +8,8 @@
 
 Header *find_header(Header **headers, uint8_t headersLength, char *key)
 {
-    for (; headersLength--; (*headers)++)
-        if (strcmp((*headers)->key, key) == 0)
+    for (; headersLength--; *(headers++))
+        if (strcmp(tolower((*headers)->key), tolower(key)) == 0)
             return *headers;
     return NULL;
 }

@@ -21,26 +21,26 @@ Header **http_header_parser(char *rawHttp, uint8_t *headerIndex, char *headersEn
     {
         if (*rawHttp == '\r' && *(rawHttp + 1) == '\n')
             break;
-        allHeaders = realloc(allHeaders, (*headerIndex + 1) * sizeof(Header *));
-        char *key = malloc(1);
+        allHeaders = realloc(allHeaders, sizeof(Header *) * (*headerIndex + 1));
+        char *key = malloc(sizeof(char));
         *key = '\0';
         uint8_t keyLength;
         rawHttp++;
         for (keyLength = 1; *(rawHttp - 1) != ':'; keyLength++)
         {
-            key = realloc(key, keyLength + 1);
+            key = realloc(key, sizeof(char) * (keyLength + 1));
             *(key + keyLength - 1) = *(rawHttp - 1);
             *(key + keyLength) = '\0';
             rawHttp++;
         }
-        char *value = malloc(1);
+        char *value = malloc(sizeof(char));
         *value = '\0';
         uint8_t valueLength;
-        rawHttp++;
+        rawHttp += 2;
         for (valueLength = 1; !(*(rawHttp - 1) == '\r' && *rawHttp == '\n'); valueLength++)
         {
-            value = realloc(value, valueLength + 1);
-            *(value + valueLength - 1) = *rawHttp;
+            value = realloc(value, sizeof(char) * (valueLength + 1));
+            *(value + valueLength - 1) = *(rawHttp - 1);
             *(value + valueLength) = '\0';
             rawHttp++;
         }

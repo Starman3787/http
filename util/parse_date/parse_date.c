@@ -24,7 +24,7 @@ time_t parse_date(char *date)
     for (uint8_t i = 0; *(++date) != ' '; i++)
          mon[i] = *date;
     t.tm_mon = convertMonth(mon);
-    char *year = malloc(1);
+    char *year = malloc(sizeof(char) * 1);
     *year = '\0';
     for (uint8_t i = 1; *(++date) != ' '; i++)
     {

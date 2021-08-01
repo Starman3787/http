@@ -24,7 +24,7 @@ char *chunked(char *httpNoHeaders, size_t *outputLength)
             break;
         httpNoHeaders += 2;
         (*outputLength) += chunkLength;
-        output = realloc(output, *outputLength);
+        output = realloc(output, sizeof(char) * (*outputLength));
         strncpy(output, httpNoHeaders, chunkLength);
         *(output + (*outputLength) - 1) = '\0';
         httpNoHeaders += chunkLength + 2;

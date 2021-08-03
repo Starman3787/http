@@ -50,5 +50,6 @@ Json **get_object(const char **cursor, size_t *size);
 Json *parse_element(const char **cursor);
 
 void display_json(Json **jsonBody, const size_t child_size);
+void free_json(Json ***jsonBody, size_t child_size);
 
 #endif

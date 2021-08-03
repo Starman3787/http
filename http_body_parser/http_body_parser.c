@@ -10,7 +10,7 @@
 #include "./encoding/chunked.c"
 #include "./types/json.c"
 
-Body *http_body_parser(char *rawBody, const Header **headers, uint8_t *headersLength)
+Body *http_body_parser(char *rawBody, const Header **headers, uint8_t headersLength)
 {
     Body *parsedBody = malloc(sizeof(Body) * 1);
     Header *transferEncodingHeader = find_header(headers, headersLength, "transfer-encoding");

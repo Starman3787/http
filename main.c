@@ -7,11 +7,13 @@
 #include "./http_header_parser/http_header_parser.c"
 #include "./http_header_parser/http_header_structures.h"
 #include "./util/find_header/find_header.c"
+#include "./util/display_headers/display_headers.c"
+#include "./util/free_headers/free_headers.c"
 #include "./util/parse_date/parse_date.c"
 #include "./http_body_parser/http_body_parser.c"
 #include "./http_body_parser/http_body_structures.h"
-#include "./util/hex_to_int/hex_to_int.c"
-#include "./util/display_json/display_json.c"
+#include "./util/display_body/display_body.c"
+#include "./util/free_body/free_body.c"
 
 void main(void)
 {
@@ -25,25 +27,19 @@ void main(void)
     char *headersEnd;
     Header **headers = http_header_parser(response, &headersLength, &headersEnd);
 
-    printf("%d\n", headersLength);
-    for (uint8_t i = 0; i < headersLength; i++)
-        printf("%s: %s\n", (*(headers + i))->key, (*(headers + i))->value);
+    display_headers(headers, headersLength);
 
     headersEnd++;
-    Body *parsedBody = http_body_parser(headersEnd, headers, &headersLength);
 
-    switch (parsedBody->content_type)
-    {
-    case HEADER_CONTENT_TYPE_TEXT_PLAIN:
-        printf("%s\n", parsedBody->data.data_text);
-        break;
-    case HEADER_CONTENT_TYPE_APPLICATION_JSON:
-        display_json(parsedBody->data.data_json, parsedBody->data_size);
-        break;
-    }
+    Body *parsedBody = http_body_parser(headersEnd, headers, &headersLength);
+    display_body(parsedBody);
+    free_body(&parsedBody);
 
     Header *headerFound = find_header(headers, headersLength, "date");
     printf("%s\n", headerFound->value);
     time_t currentTime = parse_date(headerFound->value);
     printf("%lli\n", currentTime);
+
+    free_headers(&headers, headersLength);
+
 }

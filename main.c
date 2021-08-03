@@ -41,5 +41,4 @@ void main(void)
     printf("%lli\n", currentTime);
 
     free_headers(&headers, headersLength);
-
 }

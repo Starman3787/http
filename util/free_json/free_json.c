@@ -25,11 +25,11 @@ void free_json(Json ***jsonBody, size_t child_size)
             break;
         case JSON_ARRAY:
             puts("FREEING ARRAY");
-            free_json(&(*(*jsonBody + i))->data.json_array, (*(*jsonBody + i))->child_size);
+            free_json(&((*(*jsonBody + i))->data.json_array), (*(*jsonBody + i))->child_size);
             break;
         case JSON_OBJECT:
             puts("FREEING OBJECT");
-            free_json(&(*(*jsonBody + i))->data.json_array, (*(*jsonBody + i))->child_size);
+            free_json(&((*(*jsonBody + i))->data.json_object), (*(*jsonBody + i))->child_size);
             break;
         }
         puts("FREEING JSON");

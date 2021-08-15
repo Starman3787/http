@@ -1,3 +1,5 @@
+#ifndef FREE_JSON_C
+#define FREE_JSON_C
 #include <stdlib.h>
 #include <stdio.h>
 #include "../../http_body_parser/http_body_structures.h"
@@ -37,3 +39,4 @@ void free_json(Json ***jsonBody, size_t child_size)
     }
     free(*jsonBody);
 }
+#endif

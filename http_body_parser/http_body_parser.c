@@ -33,7 +33,7 @@ Body *http_body_parser(char *rawBody, Header **headers, uint8_t headersLength)
             if (strcmp(*(transferEncodingHeaderValues + transferEncodingValuesCount), "chunked") == 0)
             {
                 rawBody = chunked(rawBody, &bodySize);
-                free((transferEncodingHeaderValues + transferEncodingValuesCount));
+                free(*(transferEncodingHeaderValues + transferEncodingValuesCount));
             }
         }
     }
@@ -52,5 +52,7 @@ Body *http_body_parser(char *rawBody, Header **headers, uint8_t headersLength)
         parsedBody->data.data_text = rawBody;
         parsedBody->data_size = strlen(rawBody) + 1;
     }
+    while (contentTypeValuesCount--)
+        free(*(contentTypeHeaderValues + contentTypeValuesCount));
     return parsedBody;
 }

@@ -138,7 +138,7 @@ int64_t get_number(const char **cursor, size_t *size)
         return NULL;
     *value = '\0';
     uint8_t i;
-    for (i = 1; **cursor == '.' || isdigit(**cursor); i++, (*cursor)++)
+    for (i = 1; **cursor == '.' || isdigit((unsigned char)**cursor); i++, (*cursor)++)
     {
         if ((value = realloc(value, sizeof(char) * (i + 1))) == NULL)
         {

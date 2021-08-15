@@ -46,7 +46,8 @@ Body *http_body_parser(char *rawBody, Header **headers, uint8_t headersLength)
         parsedBody->content_type = HEADER_CONTENT_TYPE_APPLICATION_JSON;
         parsedBody->data.data_json = parse_json(rawBody, &json_size);
         parsedBody->data_size = json_size;
-    } else if (strcmp(*contentTypeHeaderValues, "text/plain") == 0)
+    }
+    else if (strcmp(*contentTypeHeaderValues, "text/plain") == 0)
     {
         parsedBody->content_type = HEADER_CONTENT_TYPE_TEXT_PLAIN;
         parsedBody->data.data_text = rawBody;

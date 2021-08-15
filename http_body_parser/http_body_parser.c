@@ -9,31 +9,37 @@
 #include "../http_header_parser/split_header_values.c"
 #include "./encoding/chunked.c"
 #include "./types/json.c"
+#include "../util/to_lower_case/to_lower_case.h"
 
-Body *http_body_parser(char *rawBody, const Header **headers, uint8_t headersLength)
+Body *http_body_parser(char *rawBody, Header **headers, uint8_t headersLength)
 {
-    Body *parsedBody = malloc(sizeof(Body) * 1);
+    Body *parsedBody;
+    if ((parsedBody = malloc(sizeof(Body) * 1)) == NULL)
+        return NULL;
     Header *transferEncodingHeader = find_header(headers, headersLength, "transfer-encoding");
-    char *transferEncodingValue = tolower(transferEncodingHeader->value);
-    if (*transferEncodingValue == NULL)
+    if (transferEncodingHeader->value == NULL)
     {
         // transfer-encoding header not present
     }
     else
     {
         uint8_t transferEncodingValuesCount;
-        char **transferEncodingHeaderValues = split_header_values(transferEncodingValue, &transferEncodingValuesCount, ',');
+        char **transferEncodingHeaderValues = split_header_values(transferEncodingHeader->value, &transferEncodingValuesCount, ',');
         size_t bodySize = 0;
+        for (uint8_t i = 0; i < transferEncodingValuesCount; i++)
+            to_lower_case(*(transferEncodingHeaderValues + i));
         while (transferEncodingValuesCount--)
         {
             if (strcmp(*(transferEncodingHeaderValues + transferEncodingValuesCount), "chunked") == 0)
+            {
                 rawBody = chunked(rawBody, &bodySize);
+                free((transferEncodingHeaderValues + transferEncodingValuesCount));
+            }
         }
     }
     Header *contentTypeHeader = find_header(headers, headersLength, "content-type");
-    char *contentTypeValue = tolower(contentTypeHeader->value);
     uint8_t contentTypeValuesCount;
-    char **contentTypeHeaderValues = split_header_values(contentTypeValue, &contentTypeValuesCount, ';');
+    char **contentTypeHeaderValues = split_header_values(contentTypeHeader->value, &contentTypeValuesCount, ';');
     if (strcmp(*contentTypeHeaderValues, "application/json") == 0)
     {
         size_t json_size;

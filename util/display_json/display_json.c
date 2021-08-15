@@ -10,7 +10,7 @@ void display_json(Json **jsonBody, const size_t child_size)
         switch ((*(jsonBody + i))->type)
         {
         case JSON_NUMBER:
-            printf("%s: %d\n", (*(jsonBody + i))->key, (*(jsonBody + i))->data.json_number);
+            printf("%s: %lld\n", (*(jsonBody + i))->key, (*(jsonBody + i))->data.json_number);
             break;
         case JSON_STRING:
             printf("%s: \"%s\"\n", (*(jsonBody + i))->key, (*(jsonBody + i))->data.json_string);

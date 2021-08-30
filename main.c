@@ -26,6 +26,9 @@ int main(void)
     headersEnd++;
 
     Body *parsedBody = http_body_parser(headersEnd, headers, headersLength);
+
+    free(response);
+
     display_body(parsedBody);
     free_body(&parsedBody);
 

@@ -36,6 +36,7 @@ Body *http_body_parser(char *rawBody, Header **headers, uint8_t headersLength)
                 free(*(transferEncodingHeaderValues + transferEncodingValuesCount));
             }
         }
+        free(transferEncodingHeaderValues);
     }
     Header *contentTypeHeader = find_header(headers, headersLength, "content-type");
     uint8_t contentTypeValuesCount;
@@ -55,5 +56,7 @@ Body *http_body_parser(char *rawBody, Header **headers, uint8_t headersLength)
     }
     while (contentTypeValuesCount--)
         free(*(contentTypeHeaderValues + contentTypeValuesCount));
+    free(contentTypeHeaderValues);
+    free(rawBody);
     return parsedBody;
 }

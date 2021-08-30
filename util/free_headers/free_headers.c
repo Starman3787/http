@@ -15,6 +15,7 @@ void free_headers(Header ***headers, uint8_t headersLength)
         free((*(*headers + i))->key);
         printf("FREEING VALUE: %s\n", (*(*headers + i))->value);
         free((*(*headers + i))->value);
+        free(*(*headers + i));
     }
     free(*headers);
 }

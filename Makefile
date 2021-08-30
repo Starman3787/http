@@ -9,7 +9,6 @@ CFLAGS += -g3
 CFLAGS += -O2
 CFLAGS += -std=c17
 CFLAGS += -Wno-sequence-point
-CFLAGS += -Wno-unused-value
 CFLAGS += -lm
 # CFLAGS += -DDMALLOC
 # CFLAGS += -DDMALLOC_FUNC_CHECK

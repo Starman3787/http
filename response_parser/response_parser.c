@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include "../data/esp001s_response.h"
 #include "http_function_declarations.h"
+#ifdef DMALLOC
+#include "dmalloc.h"
+#endif
 
 /**
  * @brief Function for parsing the response received from an ESP001S WiFi module. Communication with it is done over UART, so each character is treated as if it is received over UART.

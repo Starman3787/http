@@ -7,6 +7,9 @@
 #include "./http_body_structures.h"
 #include "../util/to_lower_case/to_lower_case.h"
 #include "http_function_declarations.h"
+#ifdef DMALLOC
+#include "dmalloc.h"
+#endif
 
 Body *http_body_parser(char *rawBody, Header **headers, uint8_t headersLength)
 {

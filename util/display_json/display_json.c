@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "../../http_body_parser/http_body_structures.h"
 #include "http_function_declarations.h"
+#ifdef DMALLOC
+#include "dmalloc.h"
+#endif
 
 void display_json(Json **jsonBody, const size_t child_size)
 {

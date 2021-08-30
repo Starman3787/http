@@ -37,6 +37,7 @@ C_SRC += ./util/read_next_and_expect/read_next_and_expect.c
 LFLAGS = -Wall
 LFLAGS += -Wextra
 LFLAGS += -lm
+LFLAGS += -ldmallocth
 
 OBJS = $(C_SRC:.c=.o)
 

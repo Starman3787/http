@@ -1,6 +1,9 @@
 #include <stdint.h>
 #include "../../data/esp001s_response.h"
 #include "http_function_declarations.h"
+#ifdef DMALLOC
+#include "dmalloc.h"
+#endif
 
 uint16_t find_pattern(const char *pattern, const size_t patternLength)
 {

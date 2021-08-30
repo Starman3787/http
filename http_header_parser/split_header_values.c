@@ -1,6 +1,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "http_function_declarations.h"
+#ifdef DMALLOC
+#include "dmalloc.h"
+#endif
 
 char **split_header_values(char *headerValue, uint8_t *values, const char splitBy)
 {

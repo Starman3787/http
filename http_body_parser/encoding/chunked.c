@@ -3,6 +3,9 @@
 #include <string.h>
 #include <stdio.h>
 #include "http_function_declarations.h"
+#ifdef DMALLOC
+#include "dmalloc.h"
+#endif
 
 char *chunked(char *httpNoHeaders, size_t *outputLength)
 {

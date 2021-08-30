@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include "./http_supported.h"
 #include "http_function_declarations.h"
+#ifdef DMALLOC
+#include "dmalloc.h"
+#endif
 
 /**
  * @brief Extracts the HTTP status from the raw response.

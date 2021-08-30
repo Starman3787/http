@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include "../../http_body_parser/http_body_structures.h"
 #include "http_function_declarations.h"
+#ifdef DMALLOC
+#include "dmalloc.h"
+#endif
 
 void free_body(Body **parsedBody)
 {

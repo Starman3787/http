@@ -5,6 +5,9 @@
 #include <ctype.h>
 #include "../http_body_structures.h"
 #include "http_function_declarations.h"
+#ifdef DMALLOC
+#include "dmalloc.h"
+#endif
 
 void skip_whitespace(char **cursor)
 {

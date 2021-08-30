@@ -3,6 +3,9 @@
 #include <ctype.h>
 #include "./http_header_structures.h"
 #include "http_function_declarations.h"
+#ifdef DMALLOC
+#include "dmalloc.h"
+#endif
 
 /**
  * @brief Extracts the headers from a raw HTTP response, and returns a pointer to an array of pointers to Header structures.

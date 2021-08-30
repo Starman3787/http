@@ -2,6 +2,9 @@
 #include <stdint.h>
 #include "../../data/esp001s_response.h"
 #include "http_function_declarations.h"
+#ifdef DMALLOC
+#include "dmalloc.h"
+#endif
 
 bool read_next_and_expect(char *pattern, uint16_t startPositionOffset)
 {

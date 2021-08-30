@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include "./parse_date.h"
 #include "http_function_declarations.h"
+#ifdef DMALLOC
+#include "dmalloc.h"
+#endif
 
 time_t parse_date(char *date)
 {

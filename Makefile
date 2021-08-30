@@ -8,6 +8,7 @@ CFLAGS += -Werror
 CFLAGS += -g3
 CFLAGS += -O2
 CFLAGS += -std=c17
+CLFAGS += -D_FORTIFY_SOURCE=2
 CFLAGS += -Wno-sequence-point
 CFLAGS += -lm
 # CFLAGS += -DDMALLOC

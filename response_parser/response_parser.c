@@ -32,18 +32,18 @@ char *response_parser(void)
             currentCharacter = *(rawResponse + responseStart + counter + 1);
         }
         char *endOfRawChunkLengthString = rawChunkLength + counter + 1;
-        currentChunkLength = strtoul(rawChunkLength, &endOfRawChunkLengthString, 10) + 1;
+        currentChunkLength = strtoul(rawChunkLength, &endOfRawChunkLengthString, 10);
         free(rawChunkLength);
-        char *chunk = malloc(sizeof(char) * currentChunkLength);
+        char *chunk = malloc(sizeof(char) * (currentChunkLength + 1));
         uint16_t bodyCounter;
-        for (bodyCounter = 0; bodyCounter < currentChunkLength - 1; bodyCounter++)
+        for (bodyCounter = 0; bodyCounter < currentChunkLength; bodyCounter++)
             *(chunk + bodyCounter) = *(rawResponse + responseStart + counter + 1 + bodyCounter);
-        *(chunk + currentChunkLength - 1) = '\0';
-        currentResponseSize += currentChunkLength - 1;
-        fullRawResponse = realloc(fullRawResponse, sizeof(char) * currentResponseSize);
-        strcat(fullRawResponse, chunk);
+        *(chunk + currentChunkLength) = '\0';
+        currentResponseSize += currentChunkLength;
+        fullRawResponse = realloc(fullRawResponse, sizeof(char) * (currentResponseSize + 1));
+        strncat(fullRawResponse, chunk, currentChunkLength);
         free(chunk);
-        *(fullRawResponse + currentResponseSize + currentChunkLength - 1) = '\0';
+        *(fullRawResponse + currentResponseSize) = '\0';
         if (!read_next_and_expect("\r\n+IPD,", responseStart + counter + 1 + bodyCounter))
             break;
         responseStart = responseStart + counter + 1 + bodyCounter + 7;

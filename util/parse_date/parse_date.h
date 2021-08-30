@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdio.h>
+#include "http_function_declarations.h"
 
 const char months[12][4] = {
     "Jan",
@@ -20,12 +21,12 @@ const char months[12][4] = {
     "Dec"
 };
 
-int8_t convertMonth(const char *month)
+int64_t convertMonth(char *month)
 {
-    for (int8_t i = 0; i < sizeof(months) / 4; i++)
+    for (int64_t i = 0; i < sizeof(months) / 4; i++)
         if (strcmp(month, months[i]) == 0)
             return i;
-    return NULL;
+    return (int64_t)NULL;
 }
 
 #endif

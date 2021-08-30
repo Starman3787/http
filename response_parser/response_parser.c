@@ -2,8 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "../data/esp001s_response.h"
-#include "../util/find_pattern/find_pattern.c"
-#include "../util/read_next_and_expect/read_next_and_expect.c"
+#include "http_function_declarations.h"
 
 /**
  * @brief Function for parsing the response received from an ESP001S WiFi module. Communication with it is done over UART, so each character is treated as if it is received over UART.

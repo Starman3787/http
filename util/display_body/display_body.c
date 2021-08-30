@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "../../http_body_parser/http_body_structures.h"
-#include "../display_json/display_json.c"
+#include "http_function_declarations.h"
 
 void display_body(Body *parsedBody)
 {

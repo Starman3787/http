@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "./http_supported.h"
+#include "http_function_declarations.h"
 
 /**
  * @brief Extracts the HTTP status from the raw response.
@@ -17,7 +18,7 @@ uint16_t http_response_status(char *rawHttp)
     if (*rawHttp != ' ')
         return 0U;
     rawHttp++;
-    char *rawHttpStatus = "\0\0\0";
+    char rawHttpStatus[4];
     strncpy(rawHttpStatus, rawHttp, 3);
     char *rawHttpStatusEnd = rawHttpStatus + 3;
     return strtoul(rawHttpStatus, &rawHttpStatusEnd, 10);

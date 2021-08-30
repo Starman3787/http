@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include "../../data/esp001s_response.h"
+#include "http_function_declarations.h"
 
 bool read_next_and_expect(char *pattern, uint16_t startPositionOffset)
 {

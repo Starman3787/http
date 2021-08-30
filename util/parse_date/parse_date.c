@@ -2,11 +2,11 @@
 #include <time.h>
 #include <stdlib.h>
 #include "./parse_date.h"
+#include "http_function_declarations.h"
 
 time_t parse_date(char *date)
 {
     struct tm t;
-    time_t t_of_day;
     t.tm_isdst = 0;
     date += 4;
     char *mday = malloc(sizeof(char) * 1);
@@ -22,7 +22,7 @@ time_t parse_date(char *date)
     char mon[4];
     mon[3] = '\0';
     for (uint8_t i = 0; *(++date) != ' '; i++)
-         mon[i] = *date;
+        mon[i] = *date; 
     t.tm_mon = convertMonth(mon);
     char *year = malloc(sizeof(char) * 1);
     *year = '\0';

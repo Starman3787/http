@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "../../http_body_parser/http_body_structures.h"
+#include "http_function_declarations.h"
 
 void display_json(Json **jsonBody, const size_t child_size)
 {
@@ -10,14 +11,13 @@ void display_json(Json **jsonBody, const size_t child_size)
         switch ((*(jsonBody + i))->type)
         {
         case JSON_NUMBER:
-            printf("%s: %lld\n", (*(jsonBody + i))->key, (*(jsonBody + i))->data.json_number);
+            printf("%s: %ld\n", (*(jsonBody + i))->key, (*(jsonBody + i))->data.json_number);
             break;
         case JSON_STRING:
             printf("%s: \"%s\"\n", (*(jsonBody + i))->key, (*(jsonBody + i))->data.json_string);
             break;
         case JSON_BOOLEAN:
-            char *displayBoolean = (*(jsonBody + i))->data.json_boolean ? "true" : "false";
-            printf("%s: %s\n", (*(jsonBody + i))->key, displayBoolean);
+            printf("%s: %s\n", (*(jsonBody + i))->key, (*(jsonBody + i))->data.json_boolean ? "true" : "false");
             break;
         case JSON_ARRAY:
             if ((*(jsonBody + i))->key)

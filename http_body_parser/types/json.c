@@ -4,15 +4,15 @@
 #include <string.h>
 #include <ctype.h>
 #include "../http_body_structures.h"
-#include "../../util/free_json/free_json.c"
+#include "http_function_declarations.h"
 
-void skip_whitespace(const char **cursor)
+void skip_whitespace(char **cursor)
 {
     while (**cursor == '\t' || **cursor == '\r' || **cursor == '\n' || **cursor == ' ')
         (*cursor)++;
 }
 
-char *get_property_name(const char **cursor)
+char *get_property_name(char **cursor)
 {
     skip_whitespace(cursor);
     if (**cursor == 't' || **cursor == 'f' || **cursor == 'n' || **cursor == '[' || **cursor == '{')
@@ -36,7 +36,7 @@ char *get_property_name(const char **cursor)
     return propertyName;
 }
 
-char *get_string(const char **cursor, size_t *size)
+char *get_string(char **cursor, size_t *size)
 {
     char *value;
     if ((value = malloc(sizeof(char) * 1)) == NULL)
@@ -58,7 +58,7 @@ char *get_string(const char **cursor, size_t *size)
     return value;
 }
 
-bool get_boolean(const char **cursor, size_t *size)
+bool get_boolean(char **cursor, size_t *size)
 {
     char *value;
     if ((value = malloc(sizeof(char) * 5)) == NULL)
@@ -74,7 +74,7 @@ bool get_boolean(const char **cursor, size_t *size)
     return result;
 }
 
-Json **get_array(const char **cursor, size_t *size)
+Json **get_array(char **cursor, size_t *size)
 {
     Json **elements;
     if ((elements = malloc(sizeof(Json *) * 0)) == NULL)
@@ -103,7 +103,7 @@ Json **get_array(const char **cursor, size_t *size)
     return elements;
 }
 
-Json **get_object(const char **cursor, size_t *size)
+Json **get_object(char **cursor, size_t *size)
 {
     Json **elements;
     if ((elements = malloc(sizeof(Json *) * 0)) == NULL)
@@ -131,11 +131,11 @@ Json **get_object(const char **cursor, size_t *size)
     return elements;
 }
 
-int64_t get_number(const char **cursor, size_t *size)
+int64_t get_number(char **cursor, size_t *size)
 {
     char *value;
     if ((value = malloc(sizeof(char) * 1)) == NULL)
-        return NULL;
+        return (int64_t)NULL;
     *value = '\0';
     uint8_t i;
     for (i = 1; **cursor == '.' || isdigit((unsigned char)**cursor); i++, (*cursor)++)
@@ -143,7 +143,7 @@ int64_t get_number(const char **cursor, size_t *size)
         if ((value = realloc(value, sizeof(char) * (i + 1))) == NULL)
         {
             free(value);
-            return NULL;
+            return (int64_t)NULL;
         }
         *(value + i - 1) = **cursor;
         *(value + i) = '\0';
@@ -155,7 +155,7 @@ int64_t get_number(const char **cursor, size_t *size)
     return number;
 }
 
-Json *parse_element(const char **cursor)
+Json *parse_element(char **cursor)
 {
     Json *element;
     if ((element = malloc(sizeof(Json) * 1)) == NULL)
@@ -185,7 +185,7 @@ Json *parse_element(const char **cursor)
     case 'n':
         // boolean
         element->type = JSON_BOOLEAN;
-        if ((element->data.json_boolean = get_boolean(cursor, &size)) == NULL)
+        if ((element->data.json_boolean = get_boolean(cursor, &size)) == (bool)NULL)
         {
             free(element);
             return NULL;
@@ -215,7 +215,7 @@ Json *parse_element(const char **cursor)
     default:
         // number
         element->type = JSON_NUMBER;
-        if ((element->data.json_number = get_number(cursor, &size)) == NULL)
+        if ((element->data.json_number = get_number(cursor, &size)) == (int64_t)NULL)
         {
             free(element);
             return NULL;

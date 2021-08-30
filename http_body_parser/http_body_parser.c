@@ -5,11 +5,8 @@
 #include <stdlib.h>
 #include "../http_header_parser/http_header_structures.h"
 #include "./http_body_structures.h"
-#include "../util/find_header/find_header.c"
-#include "../http_header_parser/split_header_values.c"
-#include "./encoding/chunked.c"
-#include "./types/json.c"
 #include "../util/to_lower_case/to_lower_case.h"
+#include "http_function_declarations.h"
 
 Body *http_body_parser(char *rawBody, Header **headers, uint8_t headersLength)
 {

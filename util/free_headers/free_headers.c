@@ -2,7 +2,9 @@
 #define FREE_HEADERS_C
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdint.h>
 #include "../../http_header_parser/http_header_structures.h"
+#include "http_function_declarations.h"
 
 void free_headers(Header ***headers, uint8_t headersLength)
 {

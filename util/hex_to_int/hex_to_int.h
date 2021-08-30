@@ -3,6 +3,7 @@
 
 #include <ctype.h>
 #include <stdint.h>
+#include "http_function_declarations.h"
 
 uint8_t hex_char_to_int(char hex)
 {

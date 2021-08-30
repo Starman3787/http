@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "../../util/hex_to_int/hex_to_int.c"
+#include "http_function_declarations.h"
 
 char *chunked(char *httpNoHeaders, size_t *outputLength)
 {

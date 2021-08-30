@@ -1,8 +1,6 @@
-#ifndef SPLIT_HEADER_VALUES_C
-#define SPLIT_HEADER_VALUES_C
-
 #include <stdint.h>
 #include <stdlib.h>
+#include "http_function_declarations.h"
 
 char **split_header_values(char *headerValue, uint8_t *values, const char splitBy)
 {
@@ -44,5 +42,3 @@ char **split_header_values(char *headerValue, uint8_t *values, const char splitB
     }
     return headerValues;
 }
-
-#endif

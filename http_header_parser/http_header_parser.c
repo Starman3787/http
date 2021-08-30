@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "./http_header_structures.h"
-#include "../util/free_headers/free_headers.c"
+#include "http_function_declarations.h"
 
 /**
  * @brief Extracts the headers from a raw HTTP response, and returns a pointer to an array of pointers to Header structures.
@@ -11,7 +11,7 @@
  * @param *headerIndex A pointer which will contain the value of the number of headers extracted from this response.
  * @return struct Header** 
  */
-Header **http_header_parser(char *rawHttp, uint8_t *headerIndex, const char **headersEnd)
+Header **http_header_parser(char *rawHttp, uint8_t *headerIndex, char **headersEnd)
 {
     Header **allHeaders;
     if ((allHeaders = malloc(sizeof(Header *) * 1)) == NULL)

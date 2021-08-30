@@ -11,8 +11,9 @@ CFLAGS += -std=c17
 CFLAGS += -Wno-sequence-point
 CFLAGS += -Wno-unused-value
 CFLAGS += -lm
-CFLAGS += -DDMALLOC
-CFLAGS += -DDMALLOC_FUNC_CHECK
+# CFLAGS += -DDMALLOC
+# CFLAGS += -DDMALLOC_FUNC_CHECK
+CFLAGS += -DMALLOC_DISABLE
 
 C_SRC = ./main.c
 C_SRC += ./response_parser/response_parser.c
@@ -37,7 +38,7 @@ C_SRC += ./util/read_next_and_expect/read_next_and_expect.c
 LFLAGS = -Wall
 LFLAGS += -Wextra
 LFLAGS += -lm
-LFLAGS += -ldmallocth
+# LFLAGS += -ldmallocth
 
 OBJS = $(C_SRC:.c=.o)
 

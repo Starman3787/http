@@ -67,8 +67,8 @@ struct json {
         int64_t json_number;
         char *json_string;
         bool json_boolean;
-        struct Json **json_array;
-        struct Json **json_object;
+        Json **json_array;
+        Json **json_object;
     } data;
     size_t child_size;
 };
